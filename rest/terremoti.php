@@ -21,20 +21,35 @@ try {
         throw new ErroreServerException("Non è stato fornito il riferimento del metodo da invocare");
 
 
-    if ($_GET["nomeMetodo"] == "getComboVociMenu") {
+    if ($_GET["nomeMetodo"] == "getTerremoti") {
 
         if ($_SERVER['REQUEST_METHOD'] != "GET")
             throw new MetodoHttpErratoException();
 
-        $response = getComboVociMenu();
+
+        if (!isset($_GET["magnitudo"]))
+            throw new OtterGuardianException(400, "Il campo magnitudo è richiesto");
+
+
+        if (isset($_GET["distanza"]) && (!isset($_GET["latitudine"]) || !isset($_GET["longitudine"])))
+            throw new OtterGuardianException(400, "Specificando la distanza è necessario inserire la latitudine e la longitudine");
+
+        if (isset($_GET["dataInizioIntervallo"]) != isset($_GET["dataFineIntervallo"]))
+            throw new OtterGuardianException(400, "Devi specificare sia la dataInizioIntervallo che la dataFineIntervallo");
+
+        $response = getTerremoti(isset($_GET["latitudine"]) ? $_GET["latitudine"] : null, isset($_GET["longitudine"]) ? $_GET["longitudine"] : null, isset($_GET["distanza"]) ? $_GET["distanza"] : null, $_GET["magnitudo"], isset($_GET["dataInizioIntervallo"]) ? $_GET["dataInizioIntervallo"] : null, isset($_GET["dataFineIntervallo"]) ? $_GET["dataFineIntervallo"] : null, isset($_GET["pagina"]) ? $_GET["pagina"] : null);
         http_response_code(200);
         exit(json_encode($response));
-    } else if ($_GET["nomeMetodo"] == "getComboRuoli") {
+    } else  if ($_GET["nomeMetodo"] == "getTerremoto") {
 
         if ($_SERVER['REQUEST_METHOD'] != "GET")
             throw new MetodoHttpErratoException();
 
-        $response = getComboRuoli();
+
+        if (!isset($_GET["id"]))
+            throw new OtterGuardianException(400, "Il campo id è richiesto");
+
+        $response = getTerremoto($_GET["id"]);
         http_response_code(200);
         exit(json_encode($response));
     } else {
@@ -55,6 +70,10 @@ try {
     $oggetto->descrizione = $e->getMessage();
     exit(json_encode($oggetto));
 } catch (Exception $e) {
-    generaLogSuFile("Errore sconosciuto: " . $e->getMessage());
-    httpErroreServer("Errore sconosciuto");
+    if (!ABILITA_VERIFICA_TOKEN) {
+        echo $e->getMessage();
+    } else {
+        generaLogSuFile("Errore sconosciuto: " . $e->getMessage());
+        httpErroreServer("Errore sconosciuto");
+    }
 }

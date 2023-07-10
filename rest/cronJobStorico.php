@@ -7,13 +7,14 @@ include '../services/cronJobService.php';
 
 set_time_limit(1500);
 
+$anno = "2023";
 
-$dataInizioIntervallo = new DateTime();
-$dataFineIntervallo = new DateTime();
-$dataInizioIntervallo = $dataInizioIntervallo->modify('-15 day');
+$dataInizioIntervallo = new DateTime($anno . '-01-01');
+$dataFineIntervallo = new DateTime($anno . '-01-01');
+$dataFineIntervallo = $dataFineIntervallo->modify('+15 day');
 
-$dataLimite = new DateTime();
-$dataLimite = $dataLimite->modify('+5 day');
+$dataLimite = new DateTime($anno . "-12-31");
+$dataLimite = $dataLimite->modify('+15 day');
 
 
 while ($dataFineIntervallo < $dataLimite) {

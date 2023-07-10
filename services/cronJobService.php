@@ -13,7 +13,9 @@ if (!function_exists('recuperoTerremotiDaINGV')) {
 
         $urlTmp = "http://127.0.0.1/Github-Repository/earthquake-monitor-be/datasetProva";
 
-        $datasetGrezzo = file_get_contents($urlTmp);
+       // echo $url;
+        $datasetGrezzo = file_get_contents($url);
+
         return $datasetGrezzo;
     }
 }
@@ -21,6 +23,8 @@ if (!function_exists('recuperoTerremotiDaINGV')) {
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Funzione: getListaTerremotiFormattata
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
 
 //14
 
@@ -33,7 +37,9 @@ if (!function_exists('getListaTerremotiFormattata')) {
         $numeroRiga = 1;
         $numeroColonna = 1;
 
-        foreach (explode(PHP_EOL, $listaGrezza) as $linea) {
+        while (($line = fgets($listaGrezza)) !== false) {
+            // process the line read.
+
             $numeroColonna = 1;
 
             $id = null;
@@ -52,7 +58,7 @@ if (!function_exists('getListaTerremotiFormattata')) {
             $eventType = null;
 
             if ($numeroRiga != 1) {
-                foreach (explode('|', $linea) as $p) {
+                foreach (explode('|', $line) as $p) {
                     if ($numeroColonna == 1) {
                         $id = $p;
                     } else if ($numeroColonna == 2) {
@@ -107,6 +113,7 @@ if (!function_exists('getListaTerremotiFormattata')) {
             $numeroRiga++;
         }
 
+
         return $terremoti;
     }
 }
@@ -123,7 +130,6 @@ if (!function_exists('inserisciTerremoto')) {
 
         $conn = apriConnessione();
 
-        echo $terremoto["longitude"]."<br>";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $terremoto["id"]);
