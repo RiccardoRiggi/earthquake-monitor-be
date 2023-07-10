@@ -37,6 +37,44 @@ try {
         $response = getComboRuoli();
         http_response_code(200);
         exit(json_encode($response));
+    } else if ($_GET["nomeMetodo"] == "getTipologiaFiltriPersonali") {
+
+        if ($_SERVER['REQUEST_METHOD'] != "GET")
+            throw new MetodoHttpErratoException();
+
+        $response = getTipologiaFiltriPersonali();
+        http_response_code(200);
+        exit(json_encode($response));
+    } else if ($_GET["nomeMetodo"] == "getTipologiaFiltriPersonali") {
+
+        if ($_SERVER['REQUEST_METHOD'] != "GET")
+            throw new MetodoHttpErratoException();
+
+        $response = getRegioni();
+        http_response_code(200);
+        exit(json_encode($response));
+    } else if ($_GET["nomeMetodo"] == "getProvince") {
+
+        if ($_SERVER['REQUEST_METHOD'] != "GET")
+            throw new MetodoHttpErratoException();
+
+        if (!isset($_GET["codiceRegione"]))
+            throw new OtterGuardianException(400, "Il campo codiceRegione è richiesto");
+
+        $response = getProvince($_GET["codiceRegione"]);
+        http_response_code(200);
+        exit(json_encode($response));
+    } else if ($_GET["nomeMetodo"] == "getComuni") {
+
+        if ($_SERVER['REQUEST_METHOD'] != "GET")
+            throw new MetodoHttpErratoException();
+
+        if (!isset($_GET["codiceProvincia"]))
+            throw new OtterGuardianException(400, "Il campo codiceProvincia è richiesto");
+
+        $response = getComuni($_GET["codiceProvincia"]);
+        http_response_code(200);
+        exit(json_encode($response));
     } else {
         throw new ErroreServerException("Metodo non implementato");
     }
