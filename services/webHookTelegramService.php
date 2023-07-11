@@ -158,6 +158,24 @@ if (!function_exists('getIdUtenteByTelegram')) {
     }
 }
 
+if (!function_exists('getIdTelegramByIdUtente')) {
+    function getIdTelegramByIdUtente($idUtente)
+    {
+        $conn = apriConnessione();
+        $stmt = $conn->prepare("SELECT idTelegram FROM " . PREFISSO_TAVOLA . "_telegram WHERE idUtente = :idUtente AND dataDisabilitazione IS NULL AND dataAbilitazione IS NOT NULL AND dataBlocco IS NULL");
+        $stmt->bindParam(':idUtente', $idUtente);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        chiudiConnessione($conn);
+
+        if (count($result) != 1) {
+            throw new AccessoNonAutorizzatoLoginException();
+        }
+
+        return $result[0]["idTelegram"];
+    }
+}
+
 if (!function_exists('getIdUtenteByIdLogin')) {
     function getIdUtenteByIdLogin($idLogin)
     {
