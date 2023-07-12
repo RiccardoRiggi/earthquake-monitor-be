@@ -125,6 +125,27 @@ if (!function_exists('getTerremoto')) {
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Funzione: getTerremotoCron
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+if (!function_exists('getTerremotoCron')) {
+    function getTerremotoCron($id)
+    {
+
+        $sql = "SELECT * FROM " . PREFISSO_TAVOLA . "_terremoti WHERE id = :id ";
+
+
+        $conn = apriConnessione();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        chiudiConnessione($conn);
+        return $result;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Funzione: getCoordinateDatoIndirizzo
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -384,6 +405,43 @@ if (!function_exists('getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltro')) {
         return $result;
     }
 }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Funzione: getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltroCron
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+if (!function_exists('getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltroCron')) {
+    function getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltroCron($id,$idFiltroPersonale)
+    {
+        $terremoto = getTerremotoCron($id);
+
+        $sql = "SELECT idFiltroPersonale, idTipoFiltroPersonale, nomeFiltro, codiceRegione, descrizioneRegione, codiceProvincia, descrizioneProvincia, codiceComune, descrizioneComune, cap, latitudine, longitudine, magnitudo, distanza, indirizzo, dataCreazione ";
+
+        $sql = $sql . ", ROUND((6371 *
+            acos(
+            cos(radians(:latitudine)) *
+            cos(radians(F.latitudine)) *
+            cos(radians(F.longitudine) - radians(:longitudine)) +
+            sin(radians(:latitudine)) *
+            sin(radians(F.latitudine))
+            ))) AS distanza ";
+
+        $sql = $sql . " FROM " . PREFISSO_TAVOLA . "_FILTRI_PERSONALI F ";
+        $sql = $sql . " WHERE 1=1 AND F.idTipoFiltroPersonale IN ('DISTANZA','MAGNITUDO_DISTANZA') AND F.idFiltroPersonale = :idFiltroPersonale";
+        $sql = $sql . " ORDER BY distanza ";
+
+        $conn = apriConnessione();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':latitudine', $terremoto["latitude"]);
+        $stmt->bindParam(':longitudine', $terremoto["longitude"]);
+        $stmt->bindParam(':idFiltroPersonale', $idFiltroPersonale);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        chiudiConnessione($conn);
+        return $result;
+    }
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Funzione: getCronJobs

@@ -191,11 +191,11 @@ Id evento: ".$terremoto["id"]." - <a href='https://www.google.com/maps/dir/?api=
 ";
 
          if ($filtroPersonale["idTipoFiltroPersonale"] == "MAGNITUDO") {
-            $messaggio = $messaggio . "Ricevi questo messaggio perché hai impostato il filtro <b>" . $filtroPersonale["nomeFiltro"] . "</b> con un valore di soglia pari a <b>" . $filtroPersonale["magnitudo"] . "</b>";
+            $messaggio = $messaggio . "Ricevi questo messaggio perché la magnitudo è maggiore o uguale a <b>" . $filtroPersonale["magnitudo"] . "</b>";
         } else if ($filtroPersonale["idTipoFiltroPersonale"] == "DISTANZA") {
-            $messaggio = $messaggio . "Ricevi questo messaggio perché l'epicentro del terremoto è a <b>" . $distanza . "</b> Km di distanza da <b>" . $filtroPersonale["indirizzo"].",  ".$filtroPersonale["descrizioneComune"]." (".$filtroPersonale["codiceProvincia"].") </b> come impostato nel filtro <b>" . $filtroPersonale["nomeFiltro"] . "</b>";
+            $messaggio = $messaggio . "Ricevi questo messaggio perché l'epicentro del terremoto è a <b>" . $distanza . "</b> Km di distanza da <b>" . $filtroPersonale["indirizzo"].",  ".$filtroPersonale["descrizioneComune"]." (".$filtroPersonale["codiceProvincia"].") </b> ";
         } else if ($filtroPersonale["idTipoFiltroPersonale"] == "MAGNITUDO_DISTANZA") {
-            $messaggio = $messaggio . "Ricevi questo messaggio perché l'epicentro del terremoto è a <b>" . $distanza . "</b> Km di distanza da <b>" . $filtroPersonale["indirizzo"].",  ".$filtroPersonale["descrizioneComune"]." (".$filtroPersonale["codiceProvincia"].") </b> e la magnitudo è superiore al valore di soglia impostato nel filtro <b>" . $filtroPersonale["nomeFiltro"] . "</b>";
+            $messaggio = $messaggio . "Ricevi questo messaggio perché l'epicentro del terremoto è a <b>" . $distanza . "</b> Km di distanza da <b>" . $filtroPersonale["indirizzo"].",  ".$filtroPersonale["descrizioneComune"]." (".$filtroPersonale["codiceProvincia"].") </b> e la magnitudo è maggiore o uguale a <b>" . $filtroPersonale["magnitudo"] . "</b>";
         }
 
         return $messaggio;

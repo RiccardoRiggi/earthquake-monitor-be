@@ -14,7 +14,7 @@ set_time_limit(1500);
 
 $dataInizioIntervallo = new DateTime();
 $dataFineIntervallo = new DateTime();
-$dataInizioIntervallo = $dataInizioIntervallo->modify('-15 day');
+$dataInizioIntervallo = $dataInizioIntervallo->modify('-3 day');
 
 $dataLimite = new DateTime();
 $dataLimite = $dataLimite->modify('+5 day');
@@ -71,7 +71,7 @@ foreach ($listaFiltriPersonali as $filtroPersonale) {
         }
     } else if ("DISTANZA" == $filtroPersonale["idTipoFiltroPersonale"] || "MAGNITUDO_DISTANZA" == $filtroPersonale["idTipoFiltroPersonale"]) {
         foreach ($listaTerremoti as $terremoto) {
-            $distanzaTmp = getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltro($terremoto["id"], $filtroPersonale["idFiltroPersonale"])["distanza"];
+            $distanzaTmp = getDistanzaLuoghiPersonaliDatoTerremotoDatoFiltroCron($terremoto["id"], $filtroPersonale["idFiltroPersonale"])["distanza"];
             if ($distanzaTmp <= $filtroPersonale["distanza"] && "DISTANZA" == $filtroPersonale["idTipoFiltroPersonale"]) {
                 inviaNotificaSisma($terremoto,$filtroPersonale,$distanzaTmp);
             } else if ($terremoto["magnitude"] >= $filtroPersonale["magnitudo"] && $distanzaTmp <= $filtroPersonale["distanza"] && "MAGNITUDO_DISTANZA" == $filtroPersonale["idTipoFiltroPersonale"]) {
