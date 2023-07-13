@@ -182,7 +182,7 @@ if (!function_exists('getMessaggio')) {
     {
         $time = new DateTime($terremoto["time"]);
         $timeData = $time->format('d-m-Y');
-        $timeOra = $time->format('h:m:s');
+        $timeOra = $time->format('H:m:s');
 
         $messaggio = "Un terremoto di magnitudo <b>" . $terremoto["magType"] . " " . $terremoto["magnitude"] . "</b> è avvenuto alle ore " . $timeOra . " del " . $timeData . " a <b>" . $terremoto["eventLocationName"] . "</b> ad una profondità di " . $terremoto["depth"] . " Km. 
         

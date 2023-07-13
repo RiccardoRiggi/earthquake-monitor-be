@@ -45,7 +45,7 @@ try {
         $response = getTipologiaFiltriPersonali();
         http_response_code(200);
         exit(json_encode($response));
-    } else if ($_GET["nomeMetodo"] == "getTipologiaFiltriPersonali") {
+    } else if ($_GET["nomeMetodo"] == "getRegioni") {
 
         if ($_SERVER['REQUEST_METHOD'] != "GET")
             throw new MetodoHttpErratoException();
