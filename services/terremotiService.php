@@ -174,7 +174,7 @@ if (!function_exists('getFiltriPersonali')) {
         $paginaDaEstrarre = ($pagina - 1) * ELEMENTI_PER_PAGINA;
 
 
-        $sql = "SELECT * FROM " . PREFISSO_TAVOLA . "_filtri_personali WHERE idUtente = :idUtente AND dataEliminazione IS NULL ORDER BY dataCreazione DESC LIMIT :pagina, " . ELEMENTI_PER_PAGINA;
+        $sql = "SELECT * FROM " . PREFISSO_TAVOLA . "_filtri_personali INNER JOIN ".PREFISSO_TAVOLA."_t_filtri_personali ON ".PREFISSO_TAVOLA."_filtri_personali.idTipoFiltroPersonale = ".PREFISSO_TAVOLA."_t_filtri_personali.idTipoFiltroPersonale WHERE idUtente = :idUtente AND dataEliminazione IS NULL ORDER BY dataCreazione DESC LIMIT :pagina, " . ELEMENTI_PER_PAGINA;
 
 
         $conn = apriConnessione();
