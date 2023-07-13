@@ -296,11 +296,12 @@ Funzione: getDistanzaComuniDatoTerremoto
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 if (!function_exists('getDistanzaComuniDatoTerremoto')) {
-    function getDistanzaComuniDatoTerremoto($id)
+    function getDistanzaComuniDatoTerremoto($id,$pagina)
     {
         verificaValiditaToken();
 
         $terremoto = getTerremoto($id);
+        $paginaDaEstrarre = ($pagina - 1) * ELEMENTI_PER_PAGINA;
 
 
 
@@ -318,11 +319,13 @@ if (!function_exists('getDistanzaComuniDatoTerremoto')) {
         $sql = $sql . " FROM " . PREFISSO_TAVOLA . "_COMUNI C, ".PREFISSO_TAVOLA."_PROVINCE P, ".PREFISSO_TAVOLA."_REGIONI R ";
         $sql = $sql . " WHERE 1=1 AND C.codiceProvincia = P.codiceProvincia AND P.codiceRegione = R.codiceRegione";
         $sql = $sql . " ORDER BY distanza ";
+        $sql = $sql . " LIMIT :pagina, " . ELEMENTI_PER_PAGINA;
 
         $conn = apriConnessione();
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':latitudine', $terremoto["latitude"]);
         $stmt->bindParam(':longitudine', $terremoto["longitude"]);
+        $stmt->bindParam(':pagina', $paginaDaEstrarre, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll();
         chiudiConnessione($conn);
@@ -336,11 +339,14 @@ Funzione: getDistanzaLuoghiPersonaliDatoTerremoto
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 if (!function_exists('getDistanzaLuoghiPersonaliDatoTerremoto')) {
-    function getDistanzaLuoghiPersonaliDatoTerremoto($id)
+    function getDistanzaLuoghiPersonaliDatoTerremoto($id,$pagina)
     {
         verificaValiditaToken();
         $idUtente = getIdUtenteDaToken($_SERVER["HTTP_TOKEN"]);
         $terremoto = getTerremoto($id);
+
+        $paginaDaEstrarre = ($pagina - 1) * ELEMENTI_PER_PAGINA;
+
 
         $sql = "SELECT idFiltroPersonale, idTipoFiltroPersonale, nomeFiltro, codiceRegione, descrizioneRegione, codiceProvincia, descrizioneProvincia, codiceComune, descrizioneComune, cap, latitudine, longitudine, magnitudo, distanza, indirizzo, dataCreazione ";
 
@@ -354,14 +360,16 @@ if (!function_exists('getDistanzaLuoghiPersonaliDatoTerremoto')) {
             ))) AS distanza ";
 
         $sql = $sql . " FROM " . PREFISSO_TAVOLA . "_FILTRI_PERSONALI F ";
-        $sql = $sql . " WHERE 1=1 AND F.idTipoFiltroPersonale IN ('DISTANZA','MAGNITUDO_DISTANZA') AND F.idUtente = :idUtente";
+        $sql = $sql . " WHERE 1=1 AND F.idTipoFiltroPersonale IN ('DISTANZA','MAGNITUDO_DISTANZA') AND F.idUtente = :idUtente AND F.dataEliminazione IS NULL";
         $sql = $sql . " ORDER BY distanza ";
+        $sql = $sql . " LIMIT :pagina, " . ELEMENTI_PER_PAGINA;
 
         $conn = apriConnessione();
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':latitudine', $terremoto["latitude"]);
         $stmt->bindParam(':longitudine', $terremoto["longitude"]);
         $stmt->bindParam(':idUtente', $idUtente);
+        $stmt->bindParam(':pagina', $paginaDaEstrarre, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll();
         chiudiConnessione($conn);

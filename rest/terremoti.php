@@ -189,8 +189,11 @@ try {
         if (!isset($_GET["id"]))
             throw new OtterGuardianException(400, "Il campo id è richiesto");
 
+        if (!isset($_GET["pagina"]))
+            throw new OtterGuardianException(400, "Il campo pagina è richiesto");
 
-        $response = getDistanzaComuniDatoTerremoto($_GET["id"]);
+
+        $response = getDistanzaComuniDatoTerremoto($_GET["id"],$_GET["pagina"]);
         http_response_code(200);
         exit(json_encode($response));
     } else if ($_GET["nomeMetodo"] == "getDistanzaLuoghiPersonaliDatoTerremoto") {
@@ -201,8 +204,11 @@ try {
         if (!isset($_GET["id"]))
             throw new OtterGuardianException(400, "Il campo id è richiesto");
 
+        if (!isset($_GET["pagina"]))
+            throw new OtterGuardianException(400, "Il campo pagina è richiesto");
 
-        $response = getDistanzaLuoghiPersonaliDatoTerremoto($_GET["id"]);
+
+        $response = getDistanzaLuoghiPersonaliDatoTerremoto($_GET["id"],$_GET["pagina"]);
         http_response_code(200);
         exit(json_encode($response));
     } else if ($_GET["nomeMetodo"] == "getCronJobs") {
