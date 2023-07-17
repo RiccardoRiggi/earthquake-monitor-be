@@ -1,162 +1,107 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Creato il: Lug 10, 2023 alle 20:32
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `database_comuni`
---
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `em_province`
---
-
-CREATE TABLE `em_province` (
-  `codiceRegione` smallint(6) NOT NULL,
-  `codiceProvincia` varchar(2) NOT NULL,
-  `descrizioneProvincia` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dump dei dati per la tabella `em_province`
---
-
-INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES
-(1, 'AQ', 'L\'Aquila'),
-(1, 'CH', 'Chieti'),
-(1, 'PE', 'Pescara'),
-(1, 'TE', 'Teramo'),
-(2, 'MT', 'Matera'),
-(2, 'PZ', 'Potenza'),
-(3, 'CS', 'Cosenza'),
-(3, 'CZ', 'Catanzaro'),
-(3, 'KR', 'Crotone'),
-(3, 'RC', 'Reggio Calabria'),
-(3, 'VV', 'Vibo Valentia'),
-(4, 'AV', 'Avellino'),
-(4, 'BN', 'Benevento'),
-(4, 'CE', 'Caserta'),
-(4, 'NA', 'Napoli'),
-(4, 'SA', 'Salerno'),
-(5, 'BO', 'Bologna'),
-(5, 'FC', 'Forlì-Cesena'),
-(5, 'FE', 'Ferrara'),
-(5, 'MO', 'Modena'),
-(5, 'PC', 'Piacenza'),
-(5, 'PR', 'Parma'),
-(5, 'RA', 'Ravenna'),
-(5, 'RE', 'Reggio Emilia'),
-(5, 'RN', 'Rimini'),
-(6, 'GO', 'Gorizia'),
-(6, 'PN', 'Pordenone'),
-(6, 'TS', 'Trieste'),
-(6, 'UD', 'Udine'),
-(7, 'FR', 'Frosinone'),
-(7, 'LT', 'Latina'),
-(7, 'RI', 'Rieti'),
-(7, 'RM', 'Roma'),
-(7, 'VT', 'Viterbo'),
-(8, 'GE', 'Genova'),
-(8, 'IM', 'Imperia'),
-(8, 'SP', 'La spezia'),
-(8, 'SV', 'Savona'),
-(9, 'BG', 'Bergamo'),
-(9, 'BS', 'Brescia'),
-(9, 'CO', 'Como'),
-(9, 'CR', 'Cremona'),
-(9, 'LC', 'Lecco'),
-(9, 'LO', 'Lodi'),
-(9, 'MB', 'Monza e della Brianza'),
-(9, 'MI', 'Milano'),
-(9, 'MN', 'Mantova'),
-(9, 'PV', 'Pavia'),
-(9, 'SO', 'Sondrio'),
-(9, 'VA', 'Varese'),
-(10, 'AN', 'Ancona'),
-(10, 'AP', 'Ascoli Piceno'),
-(10, 'FM', 'Fermo'),
-(10, 'MC', 'Macerata'),
-(10, 'PU', 'Pesaro e Urbino'),
-(11, 'CB', 'Campobasso'),
-(11, 'IS', 'Isernia'),
-(12, 'AL', 'Alessandria'),
-(12, 'AT', 'Asti'),
-(12, 'BI', 'Biella'),
-(12, 'CN', 'Cuneo'),
-(12, 'NO', 'Novara'),
-(12, 'TO', 'Torino'),
-(12, 'VB', 'Verbano Cusio Ossola'),
-(12, 'VC', 'Vercelli'),
-(13, 'BA', 'Bari'),
-(13, 'BR', 'Brindisi'),
-(13, 'BT', 'Barletta-Andria-Trani'),
-(13, 'FG', 'Foggia'),
-(13, 'LE', 'Lecce'),
-(13, 'TA', 'Taranto'),
-(14, 'CA', 'Cagliari'),
-(14, 'NU', 'Nuoro'),
-(14, 'OR', 'Oristano'),
-(14, 'SS', 'Sassari'),
-(14, 'SU', 'Sud Sardegna'),
-(15, 'AG', 'Agrigento'),
-(15, 'CL', 'Caltanissetta'),
-(15, 'CT', 'Catania'),
-(15, 'EN', 'Enna'),
-(15, 'ME', 'Messina'),
-(15, 'PA', 'Palermo'),
-(15, 'RG', 'Ragusa'),
-(15, 'SR', 'Siracusa'),
-(15, 'TP', 'Trapani'),
-(16, 'AR', 'Arezzo'),
-(16, 'FI', 'Firenze'),
-(16, 'GR', 'Grosseto'),
-(16, 'LI', 'Livorno'),
-(16, 'LU', 'Lucca'),
-(16, 'MS', 'Massa e Carrara'),
-(16, 'PI', 'Pisa'),
-(16, 'PO', 'Prato'),
-(16, 'PT', 'Pistoia'),
-(16, 'SI', 'Siena'),
-(17, 'BZ', 'Bolzano'),
-(17, 'TN', 'Trento'),
-(18, 'PG', 'Perugia'),
-(18, 'TR', 'Terni'),
-(19, 'AO', 'Aosta'),
-(20, 'BL', 'Belluno'),
-(20, 'PD', 'Padova'),
-(20, 'RO', 'Rovigo'),
-(20, 'TV', 'Treviso'),
-(20, 'VE', 'Venezia'),
-(20, 'VI', 'Vicenza'),
-(20, 'VR', 'Verona');
-
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `em_province`
---
-ALTER TABLE `em_province`
-  ADD PRIMARY KEY (`codiceRegione`,`codiceProvincia`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(1, 'AQ', 'L\'Aquila');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(1, 'CH', 'Chieti');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(1, 'PE', 'Pescara');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(1, 'TE', 'Teramo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(2, 'MT', 'Matera');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(2, 'PZ', 'Potenza');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(3, 'CS', 'Cosenza');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(3, 'CZ', 'Catanzaro');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(3, 'KR', 'Crotone');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(3, 'RC', 'Reggio Calabria');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(3, 'VV', 'Vibo Valentia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(4, 'AV', 'Avellino');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(4, 'BN', 'Benevento');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(4, 'CE', 'Caserta');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(4, 'NA', 'Napoli');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(4, 'SA', 'Salerno');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'BO', 'Bologna');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'FC', 'Forlì-Cesena');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'FE', 'Ferrara');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'MO', 'Modena');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'PC', 'Piacenza');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'PR', 'Parma');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'RA', 'Ravenna');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'RE', 'Reggio Emilia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(5, 'RN', 'Rimini');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(6, 'GO', 'Gorizia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(6, 'PN', 'Pordenone');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(6, 'TS', 'Trieste');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(6, 'UD', 'Udine');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(7, 'FR', 'Frosinone');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(7, 'LT', 'Latina');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(7, 'RI', 'Rieti');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(7, 'RM', 'Roma');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(7, 'VT', 'Viterbo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(8, 'GE', 'Genova');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(8, 'IM', 'Imperia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(8, 'SP', 'La spezia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(8, 'SV', 'Savona');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'BG', 'Bergamo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'BS', 'Brescia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'CO', 'Como');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'CR', 'Cremona');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'LC', 'Lecco');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'LO', 'Lodi');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'MB', 'Monza e della Brianza');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'MI', 'Milano');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'MN', 'Mantova');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'PV', 'Pavia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'SO', 'Sondrio');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(9, 'VA', 'Varese');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(10, 'AN', 'Ancona');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(10, 'AP', 'Ascoli Piceno');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(10, 'FM', 'Fermo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(10, 'MC', 'Macerata');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(10, 'PU', 'Pesaro e Urbino');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(11, 'CB', 'Campobasso');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(11, 'IS', 'Isernia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'AL', 'Alessandria');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'AT', 'Asti');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'BI', 'Biella');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'CN', 'Cuneo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'NO', 'Novara');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'TO', 'Torino');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'VB', 'Verbano Cusio Ossola');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(12, 'VC', 'Vercelli');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'BA', 'Bari');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'BR', 'Brindisi');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'BT', 'Barletta-Andria-Trani');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'FG', 'Foggia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'LE', 'Lecce');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(13, 'TA', 'Taranto');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(14, 'CA', 'Cagliari');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(14, 'NU', 'Nuoro');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(14, 'OR', 'Oristano');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(14, 'SS', 'Sassari');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(14, 'SU', 'Sud Sardegna');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'AG', 'Agrigento');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'CL', 'Caltanissetta');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'CT', 'Catania');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'EN', 'Enna');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'ME', 'Messina');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'PA', 'Palermo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'RG', 'Ragusa');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'SR', 'Siracusa');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(15, 'TP', 'Trapani');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'AR', 'Arezzo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'FI', 'Firenze');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'GR', 'Grosseto');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'LI', 'Livorno');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'LU', 'Lucca');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'MS', 'Massa e Carrara');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'PI', 'Pisa');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'PO', 'Prato');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'PT', 'Pistoia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(16, 'SI', 'Siena');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(17, 'BZ', 'Bolzano');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(17, 'TN', 'Trento');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(18, 'PG', 'Perugia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(18, 'TR', 'Terni');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(19, 'AO', 'Aosta');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'BL', 'Belluno');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'PD', 'Padova');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'RO', 'Rovigo');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'TV', 'Treviso');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'VE', 'Venezia');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'VI', 'Vicenza');
+INSERT INTO `em_province` (`codiceRegione`, `codiceProvincia`, `descrizioneProvincia`) VALUES(20, 'VR', 'Verona');

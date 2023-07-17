@@ -1,0 +1,3 @@
+INSERT INTO `em_t_filtri_personali` (`idTipoFiltroPersonale`, `descrizione`) VALUES('DISTANZA', 'Ricevi le notifiche di eventi sismici avvenuti nel raggio di una distanza prefissata da un punto specifico');
+INSERT INTO `em_t_filtri_personali` (`idTipoFiltroPersonale`, `descrizione`) VALUES('MAGNITUDO', 'Ricevi le notifiche di eventi sismici che superano una certa magnitudo di soglia');
+INSERT INTO `em_t_filtri_personali` (`idTipoFiltroPersonale`, `descrizione`) VALUES('MAGNITUDO_DISTANZA', 'Ricevi le notifiche di eventi sismici avvenuti nel raggio di una distanza prefissata da un punto specifico con una magnitudo superiore ad un valore di soglia');

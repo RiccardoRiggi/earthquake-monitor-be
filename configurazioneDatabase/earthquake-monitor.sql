@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 05, 2023 alle 07:46
+-- Creato il: Giu 12, 2000 alle 00:00
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -33,7 +33,22 @@ CREATE TABLE `em_codici_backup` (
   `dataGenerazione` datetime NOT NULL DEFAULT current_timestamp(),
   `dataUtilizzo` datetime DEFAULT NULL,
   `dataEliminazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_comuni`
+--
+
+CREATE TABLE `em_comuni` (
+  `codiceProvincia` varchar(2) NOT NULL,
+  `codiceComune` int(11) NOT NULL,
+  `descrizioneComune` varchar(255) DEFAULT NULL,
+  `residenti` int(11) DEFAULT NULL,
+  `longitudine` varchar(255) DEFAULT NULL,
+  `latitudine` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -47,7 +62,34 @@ CREATE TABLE `em_dispositivi_fisici` (
   `nomeDispositivo` varchar(128) DEFAULT NULL,
   `dataAbilitazione` datetime DEFAULT current_timestamp(),
   `dataDisabilitazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_filtri_personali`
+--
+
+CREATE TABLE `em_filtri_personali` (
+  `idFiltroPersonale` int(11) NOT NULL,
+  `idUtente` int(11) NOT NULL,
+  `idTipoFiltroPersonale` varchar(32) NOT NULL,
+  `nomeFiltro` varchar(512) NOT NULL,
+  `codiceRegione` varchar(32) DEFAULT NULL,
+  `descrizioneRegione` varchar(255) DEFAULT NULL,
+  `codiceProvincia` varchar(32) DEFAULT NULL,
+  `descrizioneProvincia` varchar(255) DEFAULT NULL,
+  `codiceComune` varchar(32) DEFAULT NULL,
+  `descrizioneComune` varchar(255) DEFAULT NULL,
+  `cap` varchar(32) DEFAULT NULL,
+  `latitudine` float DEFAULT NULL,
+  `longitudine` float DEFAULT NULL,
+  `magnitudo` float DEFAULT NULL,
+  `distanza` int(11) DEFAULT NULL,
+  `indirizzo` varchar(255) DEFAULT NULL,
+  `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
+  `dataEliminazione` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -59,7 +101,7 @@ CREATE TABLE `em_indirizzi_ip` (
   `indirizzoIp` varchar(128) NOT NULL,
   `contatoreAlert` int(10) NOT NULL DEFAULT 0,
   `dataBlocco` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -75,7 +117,7 @@ CREATE TABLE `em_log` (
   `path` varchar(1024) NOT NULL,
   `indirizzoIp` varchar(128) NOT NULL,
   `metodoHttp` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -91,7 +133,7 @@ CREATE TABLE `em_login` (
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
   `indirizzoIp` varchar(128) NOT NULL,
   `userAgent` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,7 +148,18 @@ CREATE TABLE `em_log_chiamate` (
   `indirizzoIp` varchar(128) NOT NULL,
   `nomeMetodo` varchar(128) NOT NULL,
   `token` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_log_cron_job`
+--
+
+CREATE TABLE `em_log_cron_job` (
+  `idCronJob` int(11) NOT NULL,
+  `dataEvento` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -119,7 +172,7 @@ CREATE TABLE `em_log_telegram` (
   `idTelegram` varchar(128) NOT NULL,
   `dataEvento` datetime NOT NULL DEFAULT current_timestamp(),
   `jsonBody` varchar(4096) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -133,7 +186,7 @@ CREATE TABLE `em_metodi_login` (
   `dataInizioValidita` datetime NOT NULL DEFAULT current_timestamp(),
   `dataFineValidita` datetime DEFAULT NULL,
   `isPredefinito` tinyint(1) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -146,7 +199,7 @@ CREATE TABLE `em_metodi_rec_psw` (
   `idUtente` int(10) NOT NULL,
   `dataInizioValidita` datetime NOT NULL DEFAULT current_timestamp(),
   `dataFineValidita` int(11) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -160,7 +213,7 @@ CREATE TABLE `em_notifiche` (
   `dataInvio` datetime NOT NULL DEFAULT current_timestamp(),
   `dataLettura` datetime DEFAULT NULL,
   `dataEliminazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -173,7 +226,19 @@ CREATE TABLE `em_notifiche_telegram` (
   `idTelegram` varchar(128) NOT NULL,
   `dataInvio` datetime NOT NULL DEFAULT current_timestamp(),
   `testo` varchar(4096) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_province`
+--
+
+CREATE TABLE `em_province` (
+  `codiceRegione` smallint(6) NOT NULL,
+  `codiceProvincia` varchar(2) NOT NULL,
+  `descrizioneProvincia` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -188,7 +253,7 @@ CREATE TABLE `em_qr_code` (
   `idUtente` int(10) DEFAULT NULL,
   `indirizzoIp` varchar(128) NOT NULL,
   `userAgent` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -203,7 +268,18 @@ CREATE TABLE `em_rec_psw` (
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
   `indirizzoIp` varchar(128) NOT NULL,
   `userAgent` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_regioni`
+--
+
+CREATE TABLE `em_regioni` (
+  `codiceRegione` smallint(6) NOT NULL,
+  `descrizioneRegione` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -217,7 +293,7 @@ CREATE TABLE `em_risorse` (
   `descrizione` varchar(1024) NOT NULL,
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
   `dataEliminazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -229,7 +305,7 @@ CREATE TABLE `em_ruoli_risorse` (
   `idTipoRuolo` varchar(32) NOT NULL,
   `idRisorsa` varchar(128) NOT NULL,
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -241,7 +317,7 @@ CREATE TABLE `em_ruoli_utenti` (
   `idTipoRuolo` varchar(32) NOT NULL,
   `idUtente` int(10) NOT NULL,
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -253,7 +329,7 @@ CREATE TABLE `em_ruoli_voci_menu` (
   `idTipoRuolo` varchar(32) NOT NULL,
   `idVoceMenu` int(10) NOT NULL,
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -273,7 +349,31 @@ CREATE TABLE `em_telegram` (
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
   `codiceAssociazione` varchar(128) NOT NULL,
   `idDispositivoFisico` varchar(128) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_terremoti`
+--
+
+CREATE TABLE `em_terremoti` (
+  `id` varchar(128) NOT NULL,
+  `time` datetime NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `depth` float NOT NULL,
+  `author` varchar(255) DEFAULT NULL,
+  `catalog` varchar(255) DEFAULT NULL,
+  `contributor` varchar(255) DEFAULT NULL,
+  `contributorId` varchar(255) DEFAULT NULL,
+  `magType` varchar(255) NOT NULL,
+  `magnitude` float NOT NULL,
+  `magAuthor` varchar(255) DEFAULT NULL,
+  `eventLocationName` varchar(255) NOT NULL,
+  `eventType` varchar(255) NOT NULL,
+  `dataCreazione` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -291,7 +391,7 @@ CREATE TABLE `em_token` (
   `indirizzoIp` varchar(128) NOT NULL,
   `userAgent` varchar(128) NOT NULL,
   `dataUltimoUtilizzo` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -308,7 +408,18 @@ CREATE TABLE `em_two_fact` (
   `dataUtilizzo` datetime DEFAULT NULL,
   `tentativi` int(11) NOT NULL,
   `indirizzoIp` varchar(128) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `em_t_filtri_personali`
+--
+
+CREATE TABLE `em_t_filtri_personali` (
+  `idTipoFiltroPersonale` varchar(32) NOT NULL,
+  `descrizione` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -319,7 +430,7 @@ CREATE TABLE `em_two_fact` (
 CREATE TABLE `em_t_metodi_login` (
   `idTipoMetodoLogin` varchar(32) NOT NULL,
   `descrizione` varchar(1024) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -330,7 +441,7 @@ CREATE TABLE `em_t_metodi_login` (
 CREATE TABLE `em_t_metodi_rec_psw` (
   `idTipoMetodoRecPsw` varchar(32) NOT NULL,
   `descrizione` varchar(1024) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -344,7 +455,7 @@ CREATE TABLE `em_t_notifiche` (
   `testo` varchar(1024) NOT NULL,
   `dataCreazione` datetime NOT NULL DEFAULT current_timestamp(),
   `dataEliminazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -355,7 +466,7 @@ CREATE TABLE `em_t_notifiche` (
 CREATE TABLE `em_t_ruoli` (
   `idTipoRuolo` varchar(32) NOT NULL,
   `descrizione` varchar(1024) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -374,7 +485,7 @@ CREATE TABLE `em_utenti` (
   `dataEliminazione` datetime DEFAULT NULL,
   `dataBlocco` datetime DEFAULT NULL,
   `tentativiCodiciBackup` int(11) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -392,7 +503,7 @@ CREATE TABLE `em_voci_menu` (
   `visibile` tinyint(4) NOT NULL,
   `dataCreazione` datetime NOT NULL,
   `dataEliminazione` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indici per le tabelle scaricate
@@ -406,11 +517,23 @@ ALTER TABLE `em_codici_backup`
   ADD KEY `idUtente` (`idUtente`);
 
 --
+-- Indici per le tabelle `em_comuni`
+--
+ALTER TABLE `em_comuni`
+  ADD PRIMARY KEY (`codiceProvincia`,`codiceComune`);
+
+--
 -- Indici per le tabelle `em_dispositivi_fisici`
 --
 ALTER TABLE `em_dispositivi_fisici`
   ADD PRIMARY KEY (`idDispositivoFisico`),
   ADD KEY `idUtente` (`idUtente`);
+
+--
+-- Indici per le tabelle `em_filtri_personali`
+--
+ALTER TABLE `em_filtri_personali`
+  ADD PRIMARY KEY (`idFiltroPersonale`);
 
 --
 -- Indici per le tabelle `em_indirizzi_ip`
@@ -439,6 +562,12 @@ ALTER TABLE `em_login`
 ALTER TABLE `em_log_chiamate`
   ADD PRIMARY KEY (`idLogChiamata`),
   ADD KEY `indirizzoIp` (`indirizzoIp`,`token`);
+
+--
+-- Indici per le tabelle `em_log_cron_job`
+--
+ALTER TABLE `em_log_cron_job`
+  ADD PRIMARY KEY (`idCronJob`);
 
 --
 -- Indici per le tabelle `em_log_telegram`
@@ -474,6 +603,12 @@ ALTER TABLE `em_notifiche_telegram`
   ADD PRIMARY KEY (`idNotificaTelegram`);
 
 --
+-- Indici per le tabelle `em_province`
+--
+ALTER TABLE `em_province`
+  ADD PRIMARY KEY (`codiceRegione`,`codiceProvincia`);
+
+--
 -- Indici per le tabelle `em_qr_code`
 --
 ALTER TABLE `em_qr_code`
@@ -486,6 +621,12 @@ ALTER TABLE `em_qr_code`
 ALTER TABLE `em_rec_psw`
   ADD PRIMARY KEY (`idRecPsw`),
   ADD KEY `idTipoRecPsw` (`idTipoRecPsw`,`idUtente`);
+
+--
+-- Indici per le tabelle `em_regioni`
+--
+ALTER TABLE `em_regioni`
+  ADD PRIMARY KEY (`codiceRegione`);
 
 --
 -- Indici per le tabelle `em_risorse`
@@ -522,6 +663,12 @@ ALTER TABLE `em_telegram`
   ADD PRIMARY KEY (`idTelegram`);
 
 --
+-- Indici per le tabelle `em_terremoti`
+--
+ALTER TABLE `em_terremoti`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indici per le tabelle `em_token`
 --
 ALTER TABLE `em_token`
@@ -536,6 +683,12 @@ ALTER TABLE `em_two_fact`
   ADD PRIMARY KEY (`idTwoFact`),
   ADD KEY `idLogin` (`idLogin`),
   ADD KEY `idRecPsw` (`idRecPsw`);
+
+--
+-- Indici per le tabelle `em_t_filtri_personali`
+--
+ALTER TABLE `em_t_filtri_personali`
+  ADD PRIMARY KEY (`idTipoFiltroPersonale`);
 
 --
 -- Indici per le tabelle `em_t_metodi_login`
@@ -566,7 +719,7 @@ ALTER TABLE `em_t_ruoli`
 --
 ALTER TABLE `em_utenti`
   ADD PRIMARY KEY (`idUtente`),
-  ADD UNIQUE KEY `email` (`email`) USING HASH;
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indici per le tabelle `em_voci_menu`
@@ -580,6 +733,12 @@ ALTER TABLE `em_voci_menu`
 --
 
 --
+-- AUTO_INCREMENT per la tabella `em_filtri_personali`
+--
+ALTER TABLE `em_filtri_personali`
+  MODIFY `idFiltroPersonale` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `em_log`
 --
 ALTER TABLE `em_log`
@@ -590,6 +749,12 @@ ALTER TABLE `em_log`
 --
 ALTER TABLE `em_log_chiamate`
   MODIFY `idLogChiamata` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `em_log_cron_job`
+--
+ALTER TABLE `em_log_cron_job`
+  MODIFY `idCronJob` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `em_log_telegram`
