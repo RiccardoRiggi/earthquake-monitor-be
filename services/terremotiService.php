@@ -238,7 +238,7 @@ if (!function_exists('inserisciFiltroPersonale')) {
         verificaValiditaToken();
         $idUtente = getIdUtenteDaToken($_SERVER["HTTP_TOKEN"]);
 
-        $sql = "INSERT INTO " . PREFISSO_TAVOLA . "_filtri_personali(idUtente, idTipoFiltroPersonale, nomeFiltro, codiceRegione, descrizioneRegione, codiceProvincia, descrizioneProvincia, codiceComune, descrizioneComune, cap, latitudine, longitudine, magnitudo, distanza, indirizzo, dataCreazione) VALUES (:idUtente, :idTipoFiltroPersonale, :nomeFiltro, :codiceRegione, :descrizioneRegione, :codiceProvincia, :descrizioneProvincia, :codiceComune, :descrizioneComune, :cap, :latitudine, :longitudine, :magnitudo, :distanza, :indirizzo, CURRENT_TIMESTAMP)";
+        $sql = "INSERT INTO " . PREFISSO_TAVOLA . "_filtri_personali (idUtente, idTipoFiltroPersonale, nomeFiltro, codiceRegione, descrizioneRegione, codiceProvincia, descrizioneProvincia, codiceComune, descrizioneComune, cap, latitudine, longitudine, magnitudo, distanza, indirizzo, dataCreazione) VALUES (:idUtente, :idTipoFiltroPersonale, :nomeFiltro, :codiceRegione, :descrizioneRegione, :codiceProvincia, :descrizioneProvincia, :codiceComune, :descrizioneComune, :cap, :latitudine, :longitudine, :magnitudo, :distanza, :indirizzo, CURRENT_TIMESTAMP)";
 
 
         $conn = apriConnessione();
@@ -259,9 +259,8 @@ if (!function_exists('inserisciFiltroPersonale')) {
         $stmt->bindParam(':distanza', $distanza);
         $stmt->bindParam(':indirizzo', $indirizzo);
         $stmt->execute();
-        $result = $stmt->fetch();
         chiudiConnessione($conn);
-        return $result;
+        return null;
     }
 }
 
@@ -285,9 +284,8 @@ if (!function_exists('deleteFiltroPersonale')) {
         $stmt->bindParam(':idUtente', $idUtente);
         $stmt->bindParam(':idFiltroPersonale', $idFiltroPersonale);
         $stmt->execute();
-        $result = $stmt->fetchAll();
         chiudiConnessione($conn);
-        return $result;
+        return null;
     }
 }
 
